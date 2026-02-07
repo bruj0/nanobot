@@ -118,10 +118,19 @@ nanobot onboard
       "search": {
         "apiKey": "BSA-xxx"
       }
+    },
+    "calendar": {
+      "enabled": true
     }
   }
 }
 ```
+
+**Google Calendar Integration:**
+1. Download `credentials.json` (OAuth Desktop App) from Google Cloud Console.
+2. Save to `~/.nanobot/google_calendar_credentials.json`.
+3. Run `nanobot calendar auth`.
+4. Chat: "List my appointments for today" or "Schedule a meeting...".
 
 
 **3. Chat**
