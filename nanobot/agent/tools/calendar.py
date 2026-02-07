@@ -1,5 +1,6 @@
 import datetime
-import os.path
+import os
+from pathlib import Path
 from typing import Any, Optional
 
 from google.auth.transport.requests import Request
@@ -11,6 +12,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from nanobot.config.schema import GoogleCalendarConfig
+from nanobot.utils.helpers import ensure_dir
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
@@ -111,6 +113,7 @@ class GoogleCalendarTool(Tool):
                 try:
                     creds.refresh(Request())
                     # Save the credentials for the next run
+                    ensure_dir(Path(token_path).parent)
                     with open(token_path, "w") as token:
                         token.write(creds.to_json())
                 except Exception:

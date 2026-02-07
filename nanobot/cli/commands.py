@@ -476,6 +476,7 @@ def calendar_auth():
     from google.oauth2.credentials import Credentials
     from google.auth.transport.requests import Request
     from nanobot.config.loader import load_config
+    from nanobot.utils.helpers import ensure_dir
     
     config = load_config()
     calendar_config = config.tools.calendar
@@ -503,6 +504,7 @@ def calendar_auth():
             flow = InstalledAppFlow.from_client_secrets_file(creds_path, SCOPES)
             creds = flow.run_local_server(port=0)
             
+        ensure_dir(Path(token_path).parent)
         with open(token_path, "w") as token:
             token.write(creds.to_json())
             
