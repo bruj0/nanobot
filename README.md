@@ -16,18 +16,20 @@
 
 ⚡️ Delivers core agent functionality in just **~4,000** lines of code — **99% smaller** than Clawdbot's 430k+ lines.
 
-📏 Real-time line count: **3,428 lines** (run `bash core_agent_lines.sh` to verify anytime)
+📏 Real-time line count: **3,422 lines** (run `bash core_agent_lines.sh` to verify anytime)
 
 ## 📢 News
 
+- **2026-02-07** 🚀 Released v0.1.3.post5 with Qwen support & several improvements! Check [here](https://github.com/HKUDS/nanobot/releases/tag/v0.1.3.post5) for details.
+- **2026-02-06** ✨ Added Moonshot/Kimi provider, Discord integration, and enhanced security hardening!
 - **2026-02-05** ✨ Added Feishu channel, DeepSeek provider, and enhanced scheduled tasks support!
-- **2026-02-04** 🚀 Released v0.1.3.post4 with multi-provider & Docker support! Check [release notes](https://github.com/HKUDS/nanobot/releases/tag/v0.1.3.post4) for details.
+- **2026-02-04** 🚀 Released v0.1.3.post4 with multi-provider & Docker support! Check [here](https://github.com/HKUDS/nanobot/releases/tag/v0.1.3.post4) for details.
 - **2026-02-03** ⚡ Integrated vLLM for local LLM support and improved natural language task scheduling!
 - **2026-02-02** 🎉 nanobot officially launched! Welcome to try 🐈 nanobot!
 
 ## Key Features of nanobot:
 
-🪶 **Ultra-Lightweight**: Just ~3,400 lines of core agent code — 99% smaller than Clawdbot.
+🪶 **Ultra-Lightweight**: Just ~4,000 lines of core agent code — 99% smaller than Clawdbot.
 
 🔬 **Research-Ready**: Clean, readable code that's easy to understand, modify, and extend for research.
 
@@ -90,8 +92,7 @@ pip install nanobot-ai
 
 > [!TIP]
 > Set your API key in `~/.nanobot/config.json`.
-> Get API keys: [OpenRouter](https://openrouter.ai/keys) (LLM) · [Brave Search](https://brave.com/search/api/) (optional, for web search)
-> You can also change the model to `minimax/minimax-m2` for lower cost.
+> Get API keys: [OpenRouter](https://openrouter.ai/keys) (Global) · [DashScope](https://dashscope.console.aliyun.com) (Qwen) · [Brave Search](https://brave.com/search/api/) (optional, for web search)
 
 **1. Initialize**
 
@@ -101,6 +102,7 @@ nanobot onboard
 
 **2. Configure** (`~/.nanobot/config.json`)
 
+For OpenRouter - recommended for global users:
 ```json
 {
   "providers": {
@@ -125,13 +127,6 @@ nanobot onboard
   }
 }
 ```
-
-**Google Calendar Integration:**
-1. Download `credentials.json` (OAuth Desktop App) from Google Cloud Console.
-2. Save to `~/.nanobot/google_calendar_credentials.json`.
-3. Run `nanobot calendar auth`.
-4. Chat: "List my appointments for today" or "Schedule a meeting...".
-
 
 **3. Chat**
 
@@ -175,8 +170,23 @@ vllm serve meta-llama/Llama-3.1-8B-Instruct --port 8000
 nanobot agent -m "Hello from my local LLM!"
 ```
 
-> [!TIP]
 > The `apiKey` can be any non-empty string for local servers that don't require authentication.
+
+## 📅 Google Calendar
+
+1. **Download Credentials**
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a project and enable **Google Calendar API**
+   - Create OAuth 2.0 Client ID (Desktop App)
+   - Download JSON and save to `~/.nanobot/google_calendar_credentials.json`
+
+2. **Authenticate**
+   ```bash
+   nanobot calendar auth
+   ```
+
+3. **Use**
+   Chat: "List my appointments for today" or "Schedule a meeting with...".
 
 ## 💬 Chat Apps
 
@@ -368,6 +378,8 @@ Config file: `~/.nanobot/config.json`
 | `deepseek` | LLM (DeepSeek direct) | [platform.deepseek.com](https://platform.deepseek.com) |
 | `groq` | LLM + **Voice transcription** (Whisper) | [console.groq.com](https://console.groq.com) |
 | `gemini` | LLM (Gemini direct) | [aistudio.google.com](https://aistudio.google.com) |
+| `aihubmix` | LLM (API gateway, access to all models) | [aihubmix.com](https://aihubmix.com) |
+| `dashscope` | LLM (Qwen) | [dashscope.console.aliyun.com](https://dashscope.console.aliyun.com) |
 
 
 ### Security
